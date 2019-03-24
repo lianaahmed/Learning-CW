@@ -4,7 +4,7 @@
 % How to use this function:
 %  On the Matlab Command window, type the following after you replace
 %  <UUN> with your UUN.
-% >> dset_dir = '/afs/inf.ed.ac.uk/group/teaching/inf2b/cwk2/d/<UUN>';
+% >> dset_dir = '/afs/inf.ed.ac.uk/group/teaching/inf2b/cwk2/d/s1703935';
 % >> [Xtrn, Ytrn, Xtst, Ytst] = load_my_data_set(dset_dir);
 % >> Xrrn = double(Xtrn)/255.0;
 % >> Xtst = double(Xtst)/255.0;

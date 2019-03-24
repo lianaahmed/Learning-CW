@@ -5,18 +5,20 @@ function task1_1(X, Y)
 %  X : M-by-D data matrix (double)
 %  Y : M-by-1 label vector (unit8)
  
-% indices stores all the indices we need for X
-% by grabbing them from Y
-indices = find(Y);
-
-% imageArray will hold each image that we get from X
-imageArray = [];
-
-for i = l:length(indices)
+for i = 1:10
+    % indices stores all the indices we need for X
+    % by grabbing them from Y
+    indices = find(Y==i,10);
+    % imageArray will hold each image that we get from X
+    imageArray = [];
     
-    img = reshape(X(i) * 255.0,28, 28)';
-    imageArray = cat(3, imageArray, img);
-
-montage(imageArray);
+    M = X(indices,:);
     
+    for k = 1:length(indices)
+        img = reshape(M(k,:) * 255.0,28, 28)';
+        imageArray = cat(3, imageArray, img);
+    end
+    montage(imageArray);
+    pause(3);
+end 
 end
