@@ -18,7 +18,7 @@ for i = 1:10
         img = reshape(M(k,:) * 255.0,28, 28)';
         imageArray = cat(3, imageArray, img);
     end
-    montage(imageArray);
-    pause(3);
+    montage(imageArray, 'ThumbnailSize', [400,400]);
+    pause(5);
 end 
 end
