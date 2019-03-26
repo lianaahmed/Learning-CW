@@ -9,20 +9,19 @@ function M = task1_2(X, Y)
 %      Note that M(K+1,:) is the mean vector of X.
 
 M = zeros(11,784);
-img = zeros(28, 28, 11);
 
-for i = 0:9
+for k = 0:9
     % indices stores all the indices we need for X
     % by grabbing them from Y
-    indices = find(Y==i);
-    M(i+1,:) = sum(X(indices,:))/length(indices);
+    indices = find(Y==k);
+    M(k+1,:) = sum(X(indices,:))/length(indices);
 end 
 
-M(11,:) = sum(M(1:10,:))/10;
+M(11,:) = sum(M(1:10,:))/10
 
-for j = 1:11
-    img(:,:,j) = reshape(M(j,:),28, 28)';
+for j = 1:length(indices)
+    img = reshape(M(j,:) * 255.0,28, 28)';
 end
-montage(img, 'DisplayRange', [0,1]);
+
 
 end
