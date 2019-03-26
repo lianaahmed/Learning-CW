@@ -1,0 +1,15 @@
+%
+%
+function task1_4(EVecs)
+% Input:
+%  Evecs : the same format as in comp_pca.m
+%
+
+ 
+
+for j = 1:10
+    img(:,:,j) = reshape(PA(j,:),28, 28)';
+end
+montage(img, 'DisplayRange', [0,1]);
+
+end

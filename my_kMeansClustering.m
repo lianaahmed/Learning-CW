@@ -17,8 +17,27 @@ function [C, idx, SSE] = my_kMeansClustering(X, k, initialCentres, maxIter)
   
   %% TO-DO
   
+  % Iterate ’maxIter’ times
+  for i = 1:maxIter
+    % Compute Squared Euclidean distance (i.e. the squared distance)
+    % between each cluster centre and each observation
+    for c = 1:K
+    D(c,:) = square_dist(A, initialCentres(c,:));
+    end
+    
+    % Assign data to clusters
+    % Ds are the actual distances and idx are the cluster assignments
+    [Ds, idx] = min(D); % find min dist. for each observation
+  
+  
+  
+  end
+
+
   C = nan;
   idx = nan;
   SSE = nan;
   
+
+
 end

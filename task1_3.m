@@ -29,9 +29,9 @@ function [EVecs, EVals, CumVar, MinDims] = task1_3(X)
 
     % Initialises MinDims as a 4 by 1 vector with zeros
     MinDims = zeros(4,1);
-    MinDims(1,1) = find(CumVar >= (0.7 * totalVar));
-    MinDims(2,1) = find(CumVar >= (0.8 * totalVar));
-    MinDims(3,1) = find(CumVar >= (0.9 * totalVar));
-    MinDims(4,1) = find(CumVar >= (0.95 * totalVar));  
+    MinDims(1,1) = find(CumVar >= (0.7 * totalVar), 1, 'first');
+    MinDims(2,1) = find(CumVar >= (0.8 * totalVar), 1, 'first');
+    MinDims(3,1) = find(CumVar >= (0.9 * totalVar), 1, 'first');
+    MinDims(4,1) = find(CumVar >= (0.95 * totalVar), 1, 'first');  
     
 end
