@@ -15,29 +15,32 @@ function [C, idx, SSE] = my_kMeansClustering(X, k, initialCentres, maxIter)
     maxIter = 500;
   end
   
-  %% TO-DO
+  [n dim] = size(X);
+  C = zeros(k, n);
+  
+  %%
+  function distance = pairwiseEuc(a,b)
+    distance = zeros(size(a,2),size(b,2));
+  end
   
   % Iterate ’maxIter’ times
   for i = 1:maxIter
     % Compute Squared Euclidean distance (i.e. the squared distance)
     % between each cluster centre and each observation
-    for c = 1:K
-    D(c,:) = square_dist(A, initialCentres(c,:));
+    for j = 1:k
+        C(j,:) = pairwiseEuc(A, initialCentres(j,:));
     end
     
     % Assign data to clusters
     % Ds are the actual distances and idx are the cluster assignments
-    [Ds, idx] = min(D); % find min dist. for each observation
+    [Ds, idx] = min(C); % find min dist. for each observation
   
-  
+    % Update cluster centres
+    % I have made the assumption that the cluster size will never be 0.
+    for j = 1:k
+        initialCentres(j, :) = mean( X(idx==j,:) );
+    end
   
   end
-
-
-  C = nan;
-  idx = nan;
   SSE = nan;
-  
-
-
 end
