@@ -16,59 +16,52 @@ function [C, idx, SSE] = my_kMeansClustering(X, k, initialCentres, maxIter)
     maxIter = 500;
   end
   
-  single(X);
-  single(k);
-  single(initialCentres);
-  single(maxIter);
-  
-  %Initialise n and m as  the respective size from X
+  %Initialise n the respective size from X
   [n, XD] = size(X);
-  [m, YD] = size(initialCentres);
   
   %Initialise C and SSE
   C = zeros(k, n);
-  SSE = single(zeros(maxIter,1));
+  SSE = zeros(maxIter,1);
   
 
-  
+  idx = zeros(size(X,1),1);
   % Iterate maxIter times
   for i = 1:maxIter
-      
+    old = idx;  
+    
     % Compute Squared Euclidean distance
     % between each cluster centre and each observation
-    C = single(pairwiseEuc(X, initialCentres));
-
     
-    
+    for j = 1:k
+        C(j,:) = naiveSQD(X, initialCentres(j,:));
+    end
     
     % Assign data to clusters
     % ds = actual distances 
     % idx = cluster assignments
     [ds, idx] = min(C, [], 2); % find min distance for each observation
-    idx = idx';
     
-    SSE(i) = single(sum(ds));
+    SSE(i) = sum(ds);
     % Update cluster centres
     % I have made the assumption that the cluster size will never be 0.
     for j = 1:k
-        initialCentres(j, :) = single(mean( X(idx==j,:)));
+        initialCentres(j, :) = myMean(X(idx==j,:));
     end
- 
+    
+    if isequal(old, idx)
+        break
+    end
+    
   end
 end
 
 
-% My pairwise Euclidean distance formula
-function distance = pairwiseEuc(a,b)
+function distance = naiveSQD(a,b)
 
-    [n, XD] = size(a);
-    [m, YD] = size(b); 
-    a = single(a);
-    b = single(b);
-    
-    XX = diag(a*a');
-    YY = diag(b*b');
+    distance = sum(bsxfun(@minus, a, b).^2, 2)';
 
-    distance = repmat(XX,1, m) - (2 * a * b') + (repmat(YY,1,n))';
+end
 
+function mean = myMean(a)
+    mean = sum(a) ./ size(a, 1);
 end
