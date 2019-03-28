@@ -39,7 +39,7 @@ function [C, idx, SSE] = my_kMeansClustering(X, k, initialCentres, maxIter)
     % Assign data to clusters
     % ds = actual distances 
     % idx = cluster assignments
-    [ds, idx] = min(C, [], 2); % find min distance for each observation
+    [ds, idx] = min(C, [], 1); % find min distance for each observation
     
     SSE(i) = sum(ds);
     % Update cluster centres
@@ -53,6 +53,7 @@ function [C, idx, SSE] = my_kMeansClustering(X, k, initialCentres, maxIter)
     end
     
   end
+  C = initialCentres;
 end
 
 
