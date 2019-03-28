@@ -10,15 +10,10 @@ function task1_5(X, Ks)
     for k = 1:length(Ks)
        initialCentres = X(1:k,:);
        [C, idx, SSE] = my_kMeansClustering(X, k, initialCentres);
-       
-       % Saving the results
        num = num2str(k);
        fileC = strcat('task1_5_c_',num,'.mat');
-       fileIDX = strcat('task1_5_idx_',num,'.mat');
-       fileSSE = strcat('task1_5_sse_',num,'.mat');
-       save(fileSSE, 'SSE');
-       save(fileC, 'C');
-       save(fileIDX, 'idx');
+       fileIDX = 
+       save(fileC, 'SSE');
     end
     
 end
