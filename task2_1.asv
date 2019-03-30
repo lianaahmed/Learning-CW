@@ -14,24 +14,12 @@ function task2_1(Xtrain, Ytrain, Xtest, Ytest, Ks)
     disp(t);
     
     for i = 1:length(Ks)
-        
         k = Ks(i);
-        [CM, acc] = comp_confmat(Ytest, Ypreds, k);
-        
-        % Saving the results
-        num = num2str(k);
-        fileCM = strcat('task1_5_cm',num,'.mat');
-        save(fileCM, 'CM');
-        
-        N = length(Xtrains);
-        Nerrs = N - diag(CM);
-       
-        disp(k);
-        disp(N);
-        disp(Nerrs);
-        disp(acc);
         
     end
-   
+    
+    
+    
+    
 end
 

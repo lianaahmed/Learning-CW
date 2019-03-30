@@ -7,8 +7,30 @@ function [Ypreds] = run_knn_classifier(Xtrain, Ytrain, Xtest, Ks)
 % Output:
 %   Ypreds : N-by-L matrix (uint8) of predicted labels for Xtest
 
-for i = 1:length(Ks)
-    k = Ks(i);
-    
-    
+    [N,D] = size(Xtest);
+    L = length(Ks);
+    Ypreds = zeros(N,L);
+
+    for i = 1:N
+        
+        % Calculate the euclidean distances between each testing 
+        % data and the training data
+        Ds = naiveSQD(Xtrain, Xtest(i,:));
+        [Ds,idx] = sort(Ds, 'ascend');
+
+        for j = 1:L
+
+            k = Ks(j);
+            indices = idx(1:k); % Keep the first k indices
+
+            Ypreds(j,:) = mode(Ytrain(indices));
+
+        end
+    end
+end
+
+function distance = naiveSQD(a,b)
+
+    distance = sum(bsxfun(@minus, a, b).^2, 2)';
+
 end

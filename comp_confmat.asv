@@ -9,6 +9,8 @@ function [CM, acc] = comp_confmat(Ytrues, Ypreds, K)
 %   acc : accuracy (i.e. correct classification rate)
 %     K : The number of classes (which is 10 for our data set)
 
+
+    K = unique(Ytrues);
     CM = zeros(size(K,1));
     numRows = size(Ytrues,1);
 
