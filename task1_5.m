@@ -8,17 +8,20 @@ function task1_5(X, Ks)
 % single(X);
 % single(Ks);
     for k = 1:length(Ks)
-       initialCentres = X(1:k,:);
-       [C, idx, SSE] = my_kMeansClustering(X, k, initialCentres);
+       
+       i = Ks(k);
+       initialCentres = X(1:i,:);
+       [C, idx, SSE] = my_kMeansClustering(X, i, initialCentres);
        
        % Saving the results
-       num = num2str(k);
+       num = num2str(i);
        fileC = strcat('task1_5_c_',num,'.mat');
        fileIDX = strcat('task1_5_idx_',num,'.mat');
        fileSSE = strcat('task1_5_sse_',num,'.mat');
        save(fileSSE, 'SSE');
        save(fileC, 'C');
        save(fileIDX, 'idx');
+       
     end
     
 end

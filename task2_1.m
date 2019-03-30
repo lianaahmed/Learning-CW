@@ -8,4 +8,8 @@ function task2_1(Xtrain, Ytrain, Xtest, Ytest, Ks)
 %  Ytest  : N-by-1 label vector (unit8) for Xtest
 %  Ks     : 1-by-L vector (integer) of the numbers of nearest neighbours in Xtrain
 
+for i = 1:length(Ks)
+    k = Ks(i);
+    
+    
 end

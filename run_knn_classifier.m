@@ -7,5 +7,8 @@ function [Ypreds] = run_knn_classifier(Xtrain, Ytrain, Xtest, Ks)
 % Output:
 %   Ypreds : N-by-L matrix (uint8) of predicted labels for Xtest
 
-
+for i = 1:length(Ks)
+    k = Ks(i);
+    
+    
 end
