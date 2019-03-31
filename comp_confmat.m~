@@ -10,16 +10,22 @@ function [CM, acc] = comp_confmat(Ytrues, Ypreds, K)
 %     K : The number of classes (which is 10 for our data set)
 
     CM = zeros(K,K);
+    numRows = size(Ytrues,1);
 
     for i = 1:K
-        A = Ytrues == i;
-        for j = 1:K
-            B = Ypreds == j;
-            CM(i,j) = sum(A & B);
-        end
-    end
+        
+        entry = CM(Ytrues(i),Ypreds(i));
+        entry = entry + 1;
+        CM(Ytrues(i), Ypreds(i)) = entry;
    
+    end
     
-    acc = sum(diag(CM))/sum(sum(CM));
+    count = 0;
+    
+    for j = 1:max(K)
+        count = count + 1;
+    end
+    
+    acc = count/numRows;
 
 end

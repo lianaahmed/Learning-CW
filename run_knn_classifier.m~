@@ -8,17 +8,17 @@ function [Ypreds] = run_knn_classifier(Xtrain, Ytrain, Xtest, Ks)
 %   Ypreds : N-by-L matrix (uint8) of predicted labels for Xtest
 
     [N,D] = size(Xtest);
-    L = length(Ks);
+    L = size(Ks, 2);
     Ypreds = zeros(N,L);
     
     % Calculate the euclidean distances between each testing 
     % data and the training data
-    distances = sqEuc(Xtest, Xtrain);
+    distances = sqEuc(Xtrain, Xtest);
     [Ds,idx] = sort(distances, 2,'ascend');
     for j = 1:L
         k = Ks(j);
-        ci = idx(:,1:k)'; % Current index
-        Ypreds(:,j) = Ytrain(mode(ci,1));
+        ci = idx(1:k); % Keep the first k indices
+        Ypreds(:,j) = Ytrain(mode((ci,1));
     end
     
     disp(Ypreds);
@@ -35,6 +35,6 @@ function distance = sqEuc(x,y)
     YY = dot(y, y, 2);
 
     %Get the Euclidean distance between each training point and test point
-    distance = repmat(XX,1,M)-2*x*y.' + repmat(YY,1,N).';
+    distance = repmat(XX,1,M)- (2*x*y.') + (repmat(YY,1,N)).';
 
 end

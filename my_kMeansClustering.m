@@ -33,7 +33,7 @@ function [C, idx, SSE] = my_kMeansClustering(X, k, initialCentres, maxIter)
     % between each cluster centre and each observation
     
     for j = 1:k
-        C(j,:) = naiveSQD(X, initialCentres(j,:));
+        C(j,:) = sqEuc(X, initialCentres(j,:));
     end
     
     % Assign data to clusters
@@ -57,9 +57,18 @@ function [C, idx, SSE] = my_kMeansClustering(X, k, initialCentres, maxIter)
 end
 
 
-function distance = naiveSQD(a,b)
+function distance = sqEuc(x,y)
 
-    distance = sum(bsxfun(@minus, a, b).^2, 2)';
+    %Get the size of each matrix
+    M = size(y, 1);
+    N = size(x, 1);
+
+    %Calculate the dot product
+    XX = dot(x, x, 2);
+    YY = dot(y, y, 2);
+
+    %Get the Euclidean distance between each training point and test point
+    distance = repmat(XX,1,M)- (2*x*y.') + (repmat(YY,1,N)).';
 
 end
 
