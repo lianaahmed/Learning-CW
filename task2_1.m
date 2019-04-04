@@ -16,7 +16,7 @@ function task2_1(Xtrain, Ytrain, Xtest, Ytest, Ks)
     for i = 1:length(Ks)
         
         k = Ks(i);
-        [CM, acc] = comp_confmat(Ytest, Ypreds(:,i), k);
+        [CM, acc] = comp_confmat(Ytest, Ypreds(:,i), 10);
         
         % Saving the results
         num = num2str(k);
@@ -27,7 +27,6 @@ function task2_1(Xtrain, Ytrain, Xtest, Ytest, Ks)
         Nerrs = N - diag(CM);
         
         disp(CM)
-       
         disp(k);
         disp(N);
         disp(Nerrs);

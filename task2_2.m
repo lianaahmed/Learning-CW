@@ -12,6 +12,12 @@ function Dmap = task2_2(X, k, MAT_evecs, MAT_evals, posVec, nbins)
 %  Dmap  : nbins-by-nbins matrix (uint8) - each element represents
 %	   the cluster number that the point belongs to.
 
+% Defining size of Dmap
+Dmap = zeros(nbins, nbins);
 
-
+for i = 1:nbins
+    for j = 1:nbins
+        
+    end
+end
 end
