@@ -17,9 +17,7 @@ Dmap = zeros(nbins, nbins);
 
 for i = 1:nbins
     for j = 1:nbins
-        for k = 1 : k
-            sqEuc(X(i,j));
-        end
+        sq
     end
 end
 end

@@ -9,13 +9,13 @@ function task2_5(Xtrain, Ytrain, Xtest, Ytest, epsilon)
 %  epsilon : a scalar variable (double) for covariance regularisation
     
     % Start Timer
-    tik;
+    tic;
         
         % Run classifcation experiment 
         [Ypreds, Ms, Covs] = run_gaussian_classifiers(Xtrain, Ytrain, Xtest, epsilon);
     
     % Stop timer and display time
-    disp(tok);
+    disp(toc);
     
     % Get and save confusion matrix
     

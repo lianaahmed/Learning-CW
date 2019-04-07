@@ -7,11 +7,13 @@ function task1_5(X, Ks)
    
 % single(X);
 % single(Ks);
+    tic;
     for k = 1:length(Ks)
        
        i = Ks(k);
        initialCentres = X(1:i,:);
-       [C, idx, SSE] = my_kMeansClustering(X, i, initialCentres);
+       
+        [C, idx, SSE] = my_kMeansClustering(X, i, initialCentres);        
        
        % Saving the results
        num = num2str(i);
@@ -22,6 +24,18 @@ function task1_5(X, Ks)
        save(fileC, 'C');
        save(fileIDX, 'idx');
        
+       % Plot SSE
+       % Label centres for each circle with class name
+       % Label axes
+
+       plot(SSE);
+       xlabel("Iteration Number");
+       ylabel("SSE");
+
+       %Plot all SSEs on same figure
+       hold on
+
     end
+    disp(toc);
     
 end
