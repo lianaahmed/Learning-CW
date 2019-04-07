@@ -12,7 +12,6 @@ function [Ypreds, Ms, Covs] = run_gaussian_classifiers(Xtrain, Ytrain, Xtest, ep
 %YourCode - Bayes classification with multivariate Gaussian distributions.
 
     [N, D] = size(Xtest);
-    [M, D] = size(Xtrain);
     K = 10; % Number of classes
 
     Ypreds = zeros(N, 1);
@@ -21,10 +20,10 @@ function [Ypreds, Ms, Covs] = run_gaussian_classifiers(Xtrain, Ytrain, Xtest, ep
 
     for i = 1:K
         % Getting the training samples from each class
-        sample = Xtrain(Ytrain == (i-1),:);             
-        mu = myMean(sample);
+        M = Xtrain(Ytrain == (i-1),:);             
+        mu = myMean(M);
         Ms(i,:) = mu;
-        Covs(i,:,:) = myCov(sample, mu) + eye(D) * epsilon;
+        Covs(i,:,:) = myCov(M, mu) + eye(D) * epsilon;
     end
     
     %Computing the posterior probabilities 
@@ -33,15 +32,17 @@ function [Ypreds, Ms, Covs] = run_gaussian_classifiers(Xtrain, Ytrain, Xtest, ep
     for i = 1:K
         mu = Ms(i,:);
         sigma = Covs(i,:,:);
-        pc = size(sample, 1)/M;
+        
+        disp("M = " + size(M));
+        disp("M' = " + size(M'));
+        disp(size(mu));
+        disp(size(Ms));
         
         % Difference between each sample and the mean
-        d = bsxfun(@minus, sample, mu);
+        d = bsxfun(@minus, M, mu);
         
-        disp(size(squeeze(sigma)));
-        disp(size(sigma));
-        postM = sum(((d/sigma).*d), 2);
-        postProbs(:,i) = -(postM + logdet(sigma))/2 + log(pc);
+        postM = squeeze(sigma) - 0.5 * d' * sigma * d;
+        postProbs(i,:) = diag(postM);
     end
     
     [~, Ypreds] = max(postProbs, [], 2);
