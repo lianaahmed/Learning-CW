@@ -17,24 +17,23 @@ function [Ypreds, Ms, Covs] = run_gaussian_classifiers(Xtrain, Ytrain, Xtest, ep
     Covs = zeros(K, D, D);
     Ypreds = zeros(N,1);
 
-    for i = 1:K
+    for i = 0:9
         % Getting the training samples from each class
-        indices = find(Ytrain == (i-1));
-        M = Xtrain(indices,:);
-        mu = myMean(M);
-        Ms(i,:) = mu;
-        Covs(i,:,:) = myCov(M, mu) + eye(D) * epsilon;
+        samples = Xtrain((Ytrain == i),:);
+        mu = myMean(samples);
+        Ms((i+1),:) = mu;
+        Covs((i+1),:,:) = myCov(samples, mu) + eye(D) * epsilon;
     end
-    disp(M);
+%     disp(samples);
     %Computing the posterior probabilities 
     
-    postProbs = zeros(N, K);
+    postProbs = zeros(4191, K);
     for i = 1:K
         mu = Ms(i,:);
         sigma = Covs(i,:,:);
         
         % Difference between each sample and the mean
-        d = bsxfun(@minus, M, mu);
+        d = bsxfun(@minus, samples, mu);
         
         postM = (-0.5) * d * inv(squeeze(sigma)) * d' -0.5 * logdet(squeeze(sigma));
         postProbs(:,i) = diag(postM);
@@ -45,8 +44,8 @@ function [Ypreds, Ms, Covs] = run_gaussian_classifiers(Xtrain, Ytrain, Xtest, ep
         Ypreds(i,:) = idx;
     end
 
-%     disp(Ypreds);
-%     disp(Ms);
-%     disp(Covs);
+     disp(Ypreds);
+     disp(Ms);
+     disp(Covs);
   
 end
