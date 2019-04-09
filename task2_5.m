@@ -30,7 +30,7 @@ function task2_5(Xtrain, Ytrain, Xtest, Ytest, epsilon)
     save('task2_5_cov10.mat', 'Cov10');
     
     % Calculates N and Nerrs
-    N = length(Xtrain);
+    N = length(Ypreds);
     Nerrs = N - diag(CM);
      
     % Displays N, Nerrs and acc in standard format

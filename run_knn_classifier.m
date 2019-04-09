@@ -6,7 +6,8 @@ function [Ypreds] = run_knn_classifier(Xtrain, Ytrain, Xtest, Ks)
 %   Ks     : 1-by-L vector (integer) of the numbers of nearest neighbours in Xtrain
 % Output:
 %   Ypreds : N-by-L matrix (uint8) of predicted labels for Xtest
-
+tic;  
+    % Get and initialise sizes
     [N,D] = size(Xtest);
     L = length(Ks);
     Ypreds = zeros(N,L);
@@ -16,17 +17,19 @@ function [Ypreds] = run_knn_classifier(Xtrain, Ytrain, Xtest, Ks)
     distances = sqEuc(Xtest, Xtrain);
     [Ds,idx] = sort(distances, 2,'ascend');
     
+    % I had some strange issues with my code, and found I had to add this
+    % extra if statement
     if L == 1
         ci = idx(:,1:Ks)'; % Current index
-        Ypreds(:,1) = Ytrain(mode(ci,1));
+        Ypreds(:,1) = Ytrain(mode(ci,1)); % Set Ypreds as Ytrain from the current index
         
     else
+        % Same as above
         for j = 1:length(Ks)
-    %         disp(idx);
             k = Ks(j);
-             disp(k);
             ci = idx(:,1:k)'; % Current index
             Ypreds(:,j) = Ytrain(mode(ci,1));
         end
     end
+disp(toc);
 end

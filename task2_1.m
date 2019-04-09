@@ -8,10 +8,8 @@ function task2_1(Xtrain, Ytrain, Xtest, Ytest, Ks)
 %  Ytest  : N-by-1 label vector (unit8) for Xtest
 %  Ks     : 1-by-L vector (integer) of the numbers of nearest neighbours in Xtrain
     
-    tic;
+
         [Ypreds] = run_knn_classifier(Xtrain, Ytrain, Xtest, Ks);
-    t = toc;
-    disp(t);
     
     for i = 1:length(Ks)
         
@@ -23,10 +21,9 @@ function task2_1(Xtrain, Ytrain, Xtest, Ytest, Ks)
         fileCM = strcat('task2_1_cm',num,'.mat');
         save(fileCM, 'CM');
         
-        N = length(Xtrain);
+        N = length(Ypreds);
         Nerrs = N - diag(CM);
         
-        disp(CM)
         disp(k);
         disp(N);
         disp(Nerrs);
