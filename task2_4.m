@@ -9,5 +9,6 @@ function [Corrs] = task2_4(Xtrain, Ytrain)
 %           for each class k = 1,...,K, and the last element holds the
 %           correlation for the whole data, i.e. Xtrain.
 
-
+    xMean = myMean(Xtrain);
+    yMean = 
 end

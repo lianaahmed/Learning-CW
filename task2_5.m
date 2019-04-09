@@ -17,17 +17,17 @@ function task2_5(Xtrain, Ytrain, Xtest, Ytest, epsilon)
     % Stop timer and display time
     disp(toc);
     
-    % Get and save confusion matrix
+    % Get and save confusion matrix and accuracy
+    [CM, acc] = comp_confmat(Ypreds, Ytest, 10);
     
-    [CM, acc] = comp_confmat(Ytrain, Ytest, 10);
-    save('task2_5_cm.mat', CM);
+    save('task2_5_cm.mat', 'CM');
     
     % Get and save M10 and Cov10
     M10 = Ms(10,:);
     Cov10 = Covs(10,:,:);
-    
-    save('task2_5_m10.mat', M10);
-    save('task2_5_cov10.mat', Cov10);
+
+    save('task2_5_m10.mat', 'M10');
+    save('task2_5_cov10.mat', 'Cov10');
     
     % Calculates N and Nerrs
     N = length(Xtrain);

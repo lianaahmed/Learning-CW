@@ -15,9 +15,18 @@ function [Ypreds] = run_knn_classifier(Xtrain, Ytrain, Xtest, Ks)
     % data and the training data
     distances = sqEuc(Xtest, Xtrain);
     [Ds,idx] = sort(distances, 2,'ascend');
-    for j = 1:L
-        k = Ks(j);
-        ci = idx(:,1:k)'; % Current index
-        Ypreds(:,j) = Ytrain(mode(ci,1));
+    
+    if L == 1
+        ci = idx(:,1:Ks)'; % Current index
+        Ypreds(:,1) = Ytrain(mode(ci,1));
+        
+    else
+        for j = 1:length(Ks)
+    %         disp(idx);
+            k = Ks(j);
+             disp(k);
+            ci = idx(:,1:k)'; % Current index
+            Ypreds(:,j) = Ytrain(mode(ci,1));
+        end
     end
 end

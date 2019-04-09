@@ -42,33 +42,27 @@ function Dmap = task1_7(MAT_ClusterCentres, MAT_M, MAT_evecs, MAT_evals, posVec,
     Xplot = linspace((mVec(1) - 5*sd1), (mVec(1) + 5*sd1), nbins);
     Yplot = linspace((mVec(2) - 5*sd2), (mVec(2) + 5*sd2), nbins);
     
-    % Helper for reshaping in a more efficient way
+    % 
     invEvecs = inv(MAT_evecs');
     
     for i = 1:nbins
         for j = 1:nbins
-            
-            % Initialise oldPoint
             oldPoint = zeros(784, 1);
             
-            % Set oldPoint as the corresponding points from Xplot and Yplot
             oldPoint(1) = Xplot(i);
             oldPoint(2) = Yplot(j);
            
-            % Reshape point and set as newPoint
             newPoint = (invEvecs * oldPoint) + posVec';
 
             % Compute distances
             distances =  sqEuc(MAT_ClusterCentres, newPoint');
             [Ds,idx] = min(distances);
-            
-            % Set current point in Dmap as the index of the distances
             Dmap(i,j) = idx;
         end
     end
     
-    % This function will draw the decision boundaries
     figure;
+    % This function will draw the decision boundaries
     [CC,h] = contourf(Dmap);
     set(h,'LineColor','none');
 end
